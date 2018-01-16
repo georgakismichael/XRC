@@ -1,0 +1,10 @@
+udp_sock = socket(AF_INET, SOCK_DGRAM) # Create a UDP socket
+udp_sock.bind(('', 0))
+udp_sock.setsockopt(SOL_SOCKET, SO_BROADCAST, 1)
+report("Starting announce on %s:%s" % (my_ip, UDP_PORT))
+
+for i in range (0,10):
+    data = MAGIC+my_ip
+    udp_sock.sendto(data, ('<broadcast>', UDP_PORT))
+    print "sent service announcement"
+    sleep(5)
